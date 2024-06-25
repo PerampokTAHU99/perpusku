@@ -17,16 +17,8 @@ class UserRoleFactory extends Factory
      */
     public function definition()
     {
-        $data = ['admin', 'user'];
-        
-        foreach($data as $val) {
-            UserRole::create([
-                'typeOfRole' => $val
-            ]);
-        }
-
         return [
-            
+            'typeOfRole' => $this->faker->randomElement(['admin', 'anggota']),
         ];
     }
 }

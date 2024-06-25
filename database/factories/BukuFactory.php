@@ -17,12 +17,16 @@ class BukuFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_buku'=>fake()->numberBetween(1,5),
-            'judul'=>fake()->sentence(),
-            'penulis'=>fake()->name(),
-            'penerbit'=>fake()->name(),
-            'stok'=>fake()->numberBetween(1,5),
-            'sampul'=>fake()->imageUrl(), 
+            'judul' => $this->faker->sentence(4),
+            'penulis' => $this->faker->name,
+            'penerbit' => $this->faker->company,
+            'stok' => $this->faker->numberBetween(0, 100),
+            'sampul' => $this->faker->imageUrl(),
+            'kategori' => $this->faker->word,
+            'keterangan' => $this->faker->paragraph,
+            'harga' => $this->faker->numberBetween(10000, 100000),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }
