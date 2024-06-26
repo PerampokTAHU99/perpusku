@@ -43,24 +43,31 @@ class BukuController extends Controller
         $buku = Buku::where('id_buku', $id)->first();
 
         if (!$buku) {
-            return redirect()->route('buku.index');
+            return redirect()->route('buku.index')->with(['status' => 'ERROR', 'message' => 'Buku tidak ditemukan']);
         }
 
-        $request->validate([
-            'sampul' => 'required|file|mimes:jpg,jpeg,png,bmp,webp|max:2048',
-        ]);
+        $judul = $request->post('judul');
+        $penulis = $request->post('penulis');
+        $penerbit = $request->post('penerbit');
+        $stok = $request->post('stok');
+        $harga = $request->post('harga');
+        $keterangan = $request->post('keterangan');
+        $kategori = $request->post('kategori');
 
-        $file = $request->file('sampul');
-        $filepath = $file->store('uploads', 'public');
+        $buku->judul = $judul ?? $buku->judul;
+        $buku->penulis = $penulis ?? $buku->penulis;
+        $buku->penerbit = $penerbit ?? $buku->penerbit;
+        $buku->stok = $stok ?? $buku->stok;
+        $buku->harga = $harga ?? $buku->harga;
+        $buku->keterangan = $keterangan ?? $buku->keterangan;
+        $buku->kategori = $kategori ?? $buku->kategori;
 
-        $buku->judul = $request->post('judul');
-        $buku->penulis = $request->post('penulis');
-        $buku->penerbit = $request->post('penerbit');
-        $buku->stok = $request->post('stok');
-        $buku->harga = $request->post('harga');
-        $buku->sampul = $filepath;
-        $buku->keterangan = $request->post('keterangan');
-        $buku->kategori = $request->post('kategori');
+        if ($request->file('sampul')) {
+            $file = $request->file('sampul');
+            $filepath = $file->store('uploads', 'public');
+            $buku->sampul = $filepath;
+        }
+
         $buku->save();
 
         return redirect()->route('buku.index');
