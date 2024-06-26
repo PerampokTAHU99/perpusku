@@ -50,21 +50,21 @@
 
             <!-- Nav Item - Admin -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link {{ ($active === "admin") ? 'active' : '' }}" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Admin</span></a>
             </li>
 
             <!-- Nav Item - Anggota -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link {{ ($active === "anggota") ? 'active' : '' }}" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Anggota</span></a>
             </li>
 
             <!-- Nav Item - Buku -->
             <li class="nav-item">
-                <a class="nav-link" href="/buku">
+                <a class="nav-link {{ request()->is('buku') ? 'active' : '' }}" href="/buku">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Buku</span></a>
             </li>
@@ -72,7 +72,7 @@
 
             <!-- Nav Item - Transaksi Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Transaksi</span>
