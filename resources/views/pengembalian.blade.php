@@ -28,7 +28,7 @@
                                 <td>{{ $pengembalian->buku->judul }}</td>
                                 <td>{{ $pengembalian->tgl_pengembalian }}</td>
                                 <td>
-                                    <div class="container">
+                                    <div class="container text-center">
                                         <ul class="list-inline m-0">
                                             <li class="list-inline-item">
                                                 <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="modal" data-target="#deleteModal{{ $pengembalian->id_pengembalian }}" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
