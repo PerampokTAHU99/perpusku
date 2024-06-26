@@ -82,7 +82,7 @@
 
             <!-- Nav Item - Anggota -->
             <li class="nav-item">
-                <a class="nav-link {{ ($active === "anggota") ? 'active' : '' }}" href="charts.html">
+                <a class="nav-link {{ ($active === "anggota") ? 'active' : '' }}" href="/anggota">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Anggota</span></a>
             </li>
