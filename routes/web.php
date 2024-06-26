@@ -1,10 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+use App\Http\Controllers\BukuController;
 
 Route::get('/', function () {
     return view('dashboard',[
@@ -25,31 +22,5 @@ Route::get('/anggota', function () {
 });
 
 Route::get('/buku', function () {
-    return view('buku',[
-        'active' => 'buku',
-    ]);
-});
-
-Route::get('/admin', function () {
-    return view('admin',[
-        'active' => 'admin',
-    ]);
-});
-
-Route::get('/peminjaman', function () {
-    return view('peminjaman',[
-        'active' => 'peminjaman',
-    ]);
-});
-
-Route::get('/pengembalian', function () {
-    return view('pengembalian',[
-        'active' => 'pengembalian',
-    ]);
-});
-
-Route::get('/denda', function () {
-    return view('denda',[
-        'active' => 'denda',
-    ]);
+    return view('buku');
 });
