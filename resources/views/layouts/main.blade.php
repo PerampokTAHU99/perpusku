@@ -105,8 +105,8 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Transaksi Menu</h6>
-                        <a class="collapse-item" href="login.html">Peminjaman</a>
-                        <a class="collapse-item" href="register.html">Pengembalian</a>
+                        <a class="collapse-item" href="{{ route('peminjaman.index') }}">Peminjaman</a>
+                        <a class="collapse-item" href="{{ route('pengembalian.index') }}">Pengembalian</a>
                     </div>
                 </div>
             </li>
