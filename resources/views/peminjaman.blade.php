@@ -18,7 +18,7 @@
                             <th class="text-secondary">Buku</th>
                             <th class="text-secondary">Tanggal Pinjam</th>
                             <th class="text-secondary">Tanggal Kembali</th>
-                            <th class="text-secondary">Aksi</th>
+                            <th class="text-secondary" style="min-width: 100px; word-wrap: break-word;">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,7 +30,7 @@
                                 <td>{{ $peminjaman->tgl_pinjaman }}</td>
                                 <td>{{ $peminjaman->tgl_pengembalian }}</td>
                                 <td>
-                                    <div class="container">
+                                    <div class="container text-center">
                                         <ul class="list-inline m-0">
                                             <li class="list-inline-item">
                                                 <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="modal" data-target="#updateModal{{ $peminjaman->id_peminjaman }}" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button>
