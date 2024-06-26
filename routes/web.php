@@ -12,7 +12,8 @@ Route::get('/', function () {
 });
 
 Route::get('/admin', [UserController::class, 'index'])->name('admin.index');
-Route::get('/anggota', [UserController::class, 'index'])->name('anggota.index');
+Route::get('/anggota', [UserController::class, 'showAnggota'])->name('anggota.index');
+Route::resource('/users', UserController::class);
 
 Route::get('/buku', [BukuController::class, 'index'])->name('buku.index');
 Route::post('/buku', [BukuController::class, 'create'])->name('buku.create');
@@ -25,8 +26,9 @@ Route::post('/peminjaman/{id}', [PeminjamanController::class, 'update'])->name('
 Route::post('/peminjaman/{id}/destroy', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
 
 Route::get('/pengembalian', [PengembalianController::class, 'index'])->name('pengembalian.index');
-Route::get('/anggota', [UserController::class, 'showAnggota'])->name('anggota.index');
 
-Route::resource('users', UserController::class);
+Route::post('/pengembalian', [PengembalianController::class, 'create'])->name('pengembalian.create');
 
+Route::post('/pengembalian/{id}', [PengembalianController::class, 'update'])->name('pengembalian.update');
 
+Route::post('/pengembalian/{id}/destroy', [PengembalianController::class, 'destroy'])->name('pengembalian.destroy');
