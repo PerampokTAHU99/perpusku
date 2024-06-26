@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\PengembalianController;
+
 
 Route::get('/', function () {
     return view('dashboard',[
@@ -28,3 +31,15 @@ Route::post('/buku', [BukuController::class, 'create'])->name('buku.create');
 Route::post('/buku/{id}', [BukuController::class, 'update'])->name('buku.update');
 
 Route::post('/buku/{id}/destroy', [BukuController::class, 'destroy'])->name('buku.destroy');
+
+
+Route::get('/peminjaman', [PeminjamanController::class, 'index'])->name('peminjaman.index');
+
+Route::post('/peminjaman', [PeminjamanController::class, 'create'])->name('peminjaman.create');
+
+Route::post('/peminjaman/{id}', [PeminjamanController::class, 'update'])->name('peminjaman.update');
+
+Route::post('/peminjaman/{id}/destroy', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
+
+
+Route::get('/pengembalian', [PengembalianController::class, 'index'])->name('pengembalian.index');
