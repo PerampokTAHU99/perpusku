@@ -17,32 +17,34 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th class="text-secondary">ID Buku</th>
-                            <th class="text-secondary">Judul</th>
-                            <th class="text-secondary">Penulis</th>
-                            <th class="text-secondary">Penerbit</th>
+                            <th class="text-secondary" style="max-width: 75px; word-wrap: break-word;">ID Buku</th>
+                            <th class="text-secondary" style="max-width: 200px; word-wrap: break-word;">Judul</th>
+                            <th class="text-secondary" style="max-width: 100px; word-wrap: break-word;">Penulis</th>
+                            <th class="text-secondary" style="max-width: 100px; word-wrap: break-word;">Penerbit</th>
                             <th class="text-secondary">Sampul</th>
                             <th class="text-secondary">Kategori</th>
                             <th class="text-secondary">Stok</th>
                             <th class="text-secondary">Harga</th>
-                            <th class="text-secondary">Aksi</th>
+                            <th class="text-secondary" style="min-width: 100px; word-wrap: break-word;">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($listBuku as $buku)
                             <tr>
-                                <td class="text-center">{{ $buku->id_buku }}</td>
+                                <td class="text-center" style="max-width: 50px; word-wrap: break-word;">{{ $buku->id_buku }}</td>
                                 <td>{{ $buku->judul }}</td>
                                 <td>{{ $buku->penulis }}</td>
                                 <td>{{ $buku->penerbit }}</td>
                                 <td>
-                                    <img id="book-cover" src="https://via.placeholder.com/300x450.png?text=Book+Cover" alt="Book Cover" class="text-center" width="150px">
+                                    <div style="display: flex; justify-content: center;">
+                                        <img id="book-cover" src="{{ $buku->sampul ? Storage::url($buku->sampul) : 'https://via.placeholder.com/300x450.png?text=Book+Cover' }}" alt="Cover {{ $buku->judul }}" style="width: 150px; height: 200px; object-fit: contain;">
+                                    </div>
                                 </td>
                                 <td>{{ $buku->kategori }}</td>
                                 <td>{{ $buku->stok }}</td>
-                                <td>Rp.{{ $buku->harga }}</td>
+                                <td>Rp. {{ number_format($buku->harga, 0, ',', '.') }}</td>
                                 <td>
-                                    <div class="container">
+                                    <div class="container text-center">
                                         <ul class="list-inline m-0">
                                             <li class="list-inline-item">
                                                 <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="modal" data-target="#editModal{{ $buku->id_buku }}" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button>
@@ -66,7 +68,7 @@
                                         </div>
 
                                         <!-- Modal body -->
-                                        <form method="POST" action="{{ route('buku.update', ['id' => $buku->id_buku]) }}">
+                                        <form method="POST" action="{{ route('buku.update', ['id' => $buku->id_buku]) }}" enctype="multipart/form-data">
                                             @csrf
                                             <div class="modal-body d-flex justify-content-between">
                                                 <div>
@@ -91,10 +93,14 @@
                                                     <div class="container mt-1">
                                                         <div class="text-center p-5">
                                                             <div class="card">
-                                                                <img id="book-cover" src="https://via.placeholder.com/300x450.png?text=Book+Cover" class="w-100" alt="Book Cover">
+                                                                @if ($buku->sampul)
+                                                                    <img id="book-cover" src="{{ Storage::url($buku->sampul) }}" class="w-100" alt="Cover {{ $buku->judul }}">
+                                                                @else
+                                                                    <img id="book-cover" src="https://via.placeholder.com/300x450.png?text=Book+Cover" class="w-100" alt="Book Cover">
+                                                                @endif
                                                             </div>
                                                             <label class="custom-file-upload btn btn-secondary mt-5" id="upload-button">
-                                                                <input type="file" id="sampul" accept="image/*">
+                                                                <input type="file" name="sampul" id="sampul" accept="image/*">
                                                                 Pilih Gambar
                                                             </label>
                                                         </div>
@@ -155,7 +161,7 @@
             </div>
 
             <!-- Modal body -->
-            <form method="POST" action="{{ route('buku.create') }}">
+            <form method="POST" action="{{ route('buku.create') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body d-flex justify-content-between">
                     <div>
@@ -178,10 +184,14 @@
                         <div class="container mt-1">
                             <div class="text-center p-5">
                                 <div class="card">
-                                    <img id="book-cover" src="https://via.placeholder.com/300x450.png?text=Book+Cover" class="w-100" alt="Book Cover">
+                                    @if ($buku->sampul)
+                                        <img id="book-cover" src="{{ Storage::url($buku->sampul) }}" class="w-100" alt="Cover {{ $buku->judul }}">
+                                    @else
+                                        <img id="book-cover" src="https://via.placeholder.com/300x450.png?text=Book+Cover" class="w-100" alt="Book Cover">
+                                    @endif
                                 </div>
                                 <label class="custom-file-upload btn btn-secondary mt-5" id="upload-button">
-                                    <input type="file" id="sampul" accept="image/*">
+                                    <input type="file" name="sampul" id="sampul" accept="image/*">
                                     Pilih Gambar
                                 </label>
                             </div>
@@ -206,6 +216,7 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     input.parentNode.parentNode.querySelector('img').src = e.target.result;
+                    input.value = file;
                 }
                 reader.readAsDataURL(file);
             }

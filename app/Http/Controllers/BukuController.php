@@ -18,13 +18,19 @@ class BukuController extends Controller
 
     public function create(Request $request): RedirectResponse
     {
+        $request->validate([
+            'sampul' => 'required|file|mimes:jpg,jpeg,png,bmp,webp|max:2048',
+        ]);
+
+        $filepath = $request->file('sampul')->store('uploads', 'public');
+
         $buku = new Buku();
         $buku->judul = $request->post('judul');
         $buku->penulis = $request->post('penulis');
         $buku->penerbit = $request->post('penerbit');
         $buku->stok = $request->post('stok');
         $buku->harga = $request->post('harga');
-        $buku->sampul = $request->file('sampul');
+        $buku->sampul = $filepath;
         $buku->keterangan = $request->post('keterangan');
         $buku->kategori = $request->post('kategori');
         $buku->save();
@@ -40,12 +46,19 @@ class BukuController extends Controller
             return redirect()->route('buku.index');
         }
 
+        $request->validate([
+            'sampul' => 'required|file|mimes:jpg,jpeg,png,bmp,webp|max:2048',
+        ]);
+
+        $file = $request->file('sampul');
+        $filepath = $file->store('uploads', 'public');
+
         $buku->judul = $request->post('judul');
         $buku->penulis = $request->post('penulis');
         $buku->penerbit = $request->post('penerbit');
         $buku->stok = $request->post('stok');
         $buku->harga = $request->post('harga');
-        $buku->sampul = $request->file('sampul');
+        $buku->sampul = $filepath;
         $buku->keterangan = $request->post('keterangan');
         $buku->kategori = $request->post('kategori');
         $buku->save();
