@@ -16,7 +16,7 @@ class PengembalianController extends Controller
     {
         $listPengembalian = Pengembalian::all();
         $listBuku = Buku::all()->sortBy('judul')->values()->all();
-        $listUser = User::all()->sortBy('name')->values()->all();
+        $listUser = User::where('id_role', 2)->orderBy('name')->get()->values()->all();
         $listPeminjaman = Peminjaman::all();
         $listPeminjamanUserIds = Peminjaman::pluck('id_user')->toArray();
         $listPengembalianUserIds = Pengembalian::pluck('id_user')->toArray();
