@@ -15,7 +15,7 @@ class PeminjamanController extends Controller
     public function index(Request $request): View
     {
         $listBuku = Buku::all()->sortBy('judul')->values()->all();
-        $listUser = User::all()->sortBy('name')->values()->all();
+        $listUser = User::where('id_role', 2)->orderBy('name')->get()->values()->all();
         $listPeminjaman = Peminjaman::with(['buku', 'user'])->get();
 
         return view('peminjaman', [
