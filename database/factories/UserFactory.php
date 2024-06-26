@@ -29,6 +29,7 @@ class UserFactory extends Factory
             'username' => $this->faker->userName,
             'password' => static::$password ??= Hash::make('password'),
             'jenis_kelamin' => $this->faker->randomElement(['Laki-laki', 'Perempuan']),
+            'kelas' => $this->faker->randomElement([1, 2, 3, 4, 5, 6]),
             'id_role' => $this->faker->randomElement([1, 2]),
         ];
     }

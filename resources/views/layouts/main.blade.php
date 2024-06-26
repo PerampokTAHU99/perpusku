@@ -75,7 +75,7 @@
 
             <!-- Nav Item - Admin -->
             <li class="nav-item">
-                <a class="nav-link {{ ($active === "admin") ? 'active' : '' }}" href="charts.html">
+                <a class="nav-link {{ ($active === "admin") ? 'active' : '' }}" href="/admin">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Admin</span></a>
             </li>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengembalianController;
+use App\Http\Controllers\UserController;
 
 
 Route::get('/', function () {
@@ -44,8 +45,9 @@ Route::post('/peminjaman/{id}/destroy', [PeminjamanController::class, 'destroy']
 
 Route::get('/pengembalian', [PengembalianController::class, 'index'])->name('pengembalian.index');
 
-Route::post('/pengembalian', [PengembalianController::class, 'create'])->name('pengembalian.create');
+Route::resource('users', UserController::class);
 
-Route::post('/pengembalian/{id}', [PengembalianController::class, 'update'])->name('pengembalian.update');
 
-Route::post('/pengembalian/{id}/destroy', [PengembalianController::class, 'destroy'])->name('pengembalian.destroy');
+Route::get('/admin', [UserController::class, 'index']);
+
+
