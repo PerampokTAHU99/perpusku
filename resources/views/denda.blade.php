@@ -26,8 +26,8 @@
                                 <td class="text-center">{{ $denda->id_peminjaman }}</td>
                                 <td>{{ $denda->user->name }}</td>
                                 <td>{{ $denda->buku->judul }}</td>
-                                <td>{{ $denda->peminjaman->tgl_peminjaman }}</td>
-                                <td>{{ $denda->peminjaman->tgl_kembali }}</td>
+                                <td>{{ $denda->peminjaman->tgl_pinjaman }}</td>
+                                <td>{{ $denda->peminjaman->tgl_pengembalian }}</td>
                                 <td class="text-center">
                                     @if ($denda->is_lunas)
                                         <i class="fa fa-check text-success"></i>
