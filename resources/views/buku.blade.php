@@ -86,7 +86,12 @@
                                                     <br>
                                                     <input type="text" name="keterangan" value="{{ $buku->keterangan }}" placeholder="Keterangan" class="form-control" required>
                                                     <br>
-                                                    <input type="text" name="kategori" value="{{ $buku->kategori }}" placeholder="Kategori" class="form-control" required>
+                                                    <select name="kategori" id="kategori" class="form-control">
+                                                        <option value=""> -- Pilih Kategori -- </option>
+                                                        @foreach (KATEGORI_BUKU as $kategori)
+                                                            <option value="{{ $kategori }}" {{ $kategori == $buku->kategori ? 'selected' : '' }}>{{ $kategori }}</option>
+                                                        @endforeach
+                                                    </select>
                                                     <br>
                                                 </div>
                                                 <div class="w-75">
@@ -177,7 +182,12 @@
                         <br>
                         <input type="text" name="keterangan" placeholder="Keterangan" class="form-control" required>
                         <br>
-                        <input type="text" name="kategori" placeholder="Kategori" class="form-control" required>
+                        <select name="kategori" id="kategori" class="form-control" required>
+                            <option value=""> -- Pilih Kategori -- </option>
+                            @foreach (KATEGORI_BUKU as $kategori)
+                                <option value="{{ $kategori }}" {{ $kategori == $buku->kategori ? 'selected' : '' }}>{{ $kategori }}</option>
+                            @endforeach
+                        </select>
                         <br>
                     </div>
                     <div class="w-75">

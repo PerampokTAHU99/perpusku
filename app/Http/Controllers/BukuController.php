@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Buku;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Models\Buku;
 use Illuminate\View\View;
+require_once app_path('/Helpers/Enums.php');
 
 class BukuController extends Controller
 {
@@ -13,7 +14,7 @@ class BukuController extends Controller
     {
         $buku = Buku::all();
 
-        return view('buku', ['listBuku' => $buku]);
+        return view('buku', ['listBuku' => $buku, 'listKategori' => KATEGORI_BUKU]);
     }
 
     public function create(Request $request): RedirectResponse
