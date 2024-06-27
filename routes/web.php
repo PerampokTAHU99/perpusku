@@ -13,6 +13,10 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/login', function () {
+    return view('login', []);
+});
+
 // Rute untuk admin
 Route::get('/admin', [UserController::class, 'index'])->name('admin.index');
 
