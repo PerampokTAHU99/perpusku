@@ -147,7 +147,6 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const listUser = @json($listUser);
-        console.log(listUser);
         const listBuku = @json($listBuku);
         const listPeminjamanAll = @json($listPeminjaman);
         const listPengembalian = @json($listPengembalian);
