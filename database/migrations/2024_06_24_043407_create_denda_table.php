@@ -15,10 +15,10 @@ class CreateDendaTable extends Migration
             $table->unsignedBigInteger('id_buku');
             $table->unsignedBigInteger('id_user');
             $table->string('keterangan')->nullable();
-            $table->integer('lama_denda');
-            $table->integer('nominal');
-            $table->integer('jml_buku');
-            $table->date('tgl_denda');
+            $table->integer('lama_denda')->nullable();
+            $table->integer('nominal')->nullable();
+            $table->date('tgl_denda')->nullable();
+            $table->boolean('is_lunas')->default(0);
             $table->timestamps();
 
             // Define foreign keys with correct table and column references
@@ -33,4 +33,4 @@ class CreateDendaTable extends Migration
     {
         Schema::dropIfExists('denda');
     }
-};
+}

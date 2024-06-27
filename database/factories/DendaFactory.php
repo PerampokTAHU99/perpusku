@@ -28,8 +28,8 @@ class DendaFactory extends Factory
             'keterangan' => $this->faker->sentence(),
             'lama_denda' => $this->faker->numberBetween(1, 10),
             'nominal' => $this->faker->numberBetween(1000, 10000),
-            'jml_buku' => $this->faker->numberBetween(1, 5),
             'tgl_denda' => $this->faker->date(),
+            'is_lunas' => $this->faker->boolean(50),
         ];
     }
 }
