@@ -4,6 +4,7 @@ use App\Http\Controllers\BukuController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DendaController;
 
 Route::get('/', function () {
     return view('dashboard',[
@@ -29,3 +30,6 @@ Route::get('/pengembalian', [PengembalianController::class, 'index'])->name('pen
 Route::post('/pengembalian', [PengembalianController::class, 'create'])->name('pengembalian.create');
 Route::post('/pengembalian/{id}', [PengembalianController::class, 'update'])->name('pengembalian.update');
 Route::post('/pengembalian/{id}/destroy', [PengembalianController::class, 'destroy'])->name('pengembalian.destroy');
+
+Route::get('/denda', [DendaController::class, 'index'])->name('denda.index');
+Route::post('/denda/{id}', [DendaController::class, 'put'])->name('denda.put');
