@@ -40,10 +40,6 @@ class PengembalianController extends Controller
         $idPeminjaman = $request->post('id_peminjaman');
         $jmlPengembalian = $request->post('jml_pengembalian');
 
-        if (!$jmlPengembalian) {
-            $jmlPengembalian = 1;
-        }
-
         $pengembalian = new Pengembalian();
         $pengembalian->id_peminjaman = $idPeminjaman;
         $pengembalian->id_buku = $idBuku;
@@ -51,6 +47,26 @@ class PengembalianController extends Controller
         $pengembalian->tgl_pengembalian = $tglPengembalian;
         $pengembalian->jumlah_pengembalian = $jmlPengembalian;
         $pengembalian->save();
+
+        $dataBuku = Buku::where('id_buku', $idBuku)->first();
+        $dataBuku->stok += $jmlPengembalian;
+        $dataBuku->save();
+
+        $dataPeminjaman = Peminjaman::where('id_peminjaman', $idPeminjaman)->first();
+        $message = '';
+
+        if ($jmlPengembalian < $dataPeminjaman->jumlah_pinjaman) {
+            Denda::create([
+                'id_peminjaman' => $pengembalian->id_peminjaman,
+                'id_pengembalian' => $pengembalian->id_pengembalian,
+                'id_user' => $pengembalian->id_user,
+                'tgl_denda' => $pengembalian->tgl_pengembalian,
+                'id_buku' => $pengembalian->id_buku,
+                'keterangan' => "Menghilangkan Buku"
+            ]);
+
+            $message = "Menghilangkan Buku, Dikenakan Denda";
+        }
 
         if ($pengembalian->tgl_pengembalian > $pengembalian->peminjaman->tgl_pengembalian) {
             Denda::create([
@@ -62,13 +78,13 @@ class PengembalianController extends Controller
                 'keterangan' => "Telat Mengembalikan Buku"
             ]);
 
-            return redirect()->route('pengembalian.index')->with([
-                'status', "SUCCESS",
-                'message', "Telat Mengembalikan Buku, Dapat Dikenakan Denda"
-            ]);
+            $message = "Telat Mengembalikan Buku, Dikenakan Denda";
         }
 
-        return redirect()->route('pengembalian.index')->with('status', "SUCCESS");
+        return redirect()->route('pengembalian.index')->with([
+            'status' => "SUCCESS",
+            'message' => $message
+        ]);
     }
 
     public function update(Request $request, $id): RedirectResponse

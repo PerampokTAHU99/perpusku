@@ -109,6 +109,10 @@
                             <label for="tgl-kembali">Tanggal Pengembalian</label>
                             <input type="date" class="form-control" name="tgl_pengembalian" id="tgl-kembali" required>
                         </div>
+                        <div class="form-group">
+                            <label for="jml_pengembalian">Jumlah Dikembalikan</label>
+                            <input type="number" class="form-control" name="jml_pengembalian" id="jml_pengembalian" min="1" value="0" required>
+                        </div>
                     </div>
                     <input type="hidden" id="id-peminjaman" name="id_peminjaman" value="" required>
                 </div>
