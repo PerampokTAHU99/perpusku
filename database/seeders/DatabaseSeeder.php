@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         UserRole::factory()->create(['typeOfRole' => 'admin']);
-        UserRole::factory()->create(['typeOfRole' => 'user']);
+        UserRole::factory()->create(['typeOfRole' => 'anggota']);
         User::factory()->count(10)->create();
         Buku::factory()->count(10)->create();
         Peminjaman::factory()->count(10)->create();

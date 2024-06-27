@@ -21,11 +21,12 @@ class UserController extends Controller
 
     public function showAnggota()
     {
+        $anggotaRole = UserRole::where('typeOfRole', 'anggota')->first();
         $users = User::whereHas('role', function ($query) {
             $query->where('typeOfRole', 'anggota');
         })->get();
 
-        return view('anggota', compact('users'));
+        return view('anggota', compact('users', 'anggotaRole'));
     }
 
     public function store(Request $request)
@@ -72,7 +73,7 @@ class UserController extends Controller
                 'password' => Hash::make('password'), // Or any dummy password
             ]);
 
-            return redirect()->route('users.index')->with('success', 'Anggota created successfully.');
+            return redirect()->route('anggota.index')->with('success', 'Anggota created successfully.');
         }
     }
 
@@ -120,7 +121,7 @@ class UserController extends Controller
                 'jenis_kelamin' => $request->jenis_kelamin,
             ]);
 
-            return redirect()->route('users.index')->with('success', 'Anggota updated successfully.');
+            return redirect()->route('anggota.index')->with('success', 'Anggota updated successfully.');
         }
     }
 
@@ -128,6 +129,6 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('anggota.index')->with('success', 'User deleted successfully.');
     }
 }

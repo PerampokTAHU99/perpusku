@@ -8,31 +8,44 @@ use App\Http\Controllers\DendaController;
 use App\Http\Controllers\PDFController;
 
 Route::get('/', function () {
-    return view('dashboard',[
+    return view('dashboard', [
         'active' => 'home',
     ]);
 });
 
+// Rute untuk admin
 Route::get('/admin', [UserController::class, 'index'])->name('admin.index');
+
+// Rute untuk anggota
 Route::get('/anggota', [UserController::class, 'showAnggota'])->name('anggota.index');
+Route::post('/anggota', [UserController::class, 'store'])->name('anggota.store');
+Route::put('/anggota/{id}', [UserController::class, 'update'])->name('anggota.update');
+Route::delete('/anggota/{id}', [UserController::class, 'destroy'])->name('anggota.destroy');
+
+// Resource route untuk users
 Route::resource('/users', UserController::class);
 
+// Rute untuk buku
 Route::get('/buku', [BukuController::class, 'index'])->name('buku.index');
 Route::post('/buku', [BukuController::class, 'create'])->name('buku.create');
 Route::post('/buku/{id}', [BukuController::class, 'update'])->name('buku.update');
 Route::post('/buku/{id}/destroy', [BukuController::class, 'destroy'])->name('buku.destroy');
 
+// Rute untuk peminjaman
 Route::get('/peminjaman', [PeminjamanController::class, 'index'])->name('peminjaman.index');
 Route::post('/peminjaman', [PeminjamanController::class, 'create'])->name('peminjaman.create');
 Route::post('/peminjaman/{id}', [PeminjamanController::class, 'update'])->name('peminjaman.update');
 Route::post('/peminjaman/{id}/destroy', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
 
+// Rute untuk pengembalian
 Route::get('/pengembalian', [PengembalianController::class, 'index'])->name('pengembalian.index');
 Route::post('/pengembalian', [PengembalianController::class, 'create'])->name('pengembalian.create');
 Route::post('/pengembalian/{id}/destroy', [PengembalianController::class, 'destroy'])->name('pengembalian.destroy');
 
+// Rute untuk denda
 Route::get('/denda', [DendaController::class, 'index'])->name('denda.index');
 Route::post('/denda/{id}', [DendaController::class, 'put'])->name('denda.put');
 
+// Rute untuk PDF
 Route::get('/pdf/test', fn () => view('pdfs.denda'));
 Route::get('/pdf/denda', [PDFController::class, 'denda'])->name('pdf.denda');
