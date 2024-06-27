@@ -17,6 +17,7 @@
                             <th class="text-secondary">Tanggal Kembali</th>
                             <th class="text-secondary text-center">Sudah Lunas?</th>
                             <th class="text-secondary">Tanggal Denda Lunas</th>
+                            <th class="text-secondary">Keterangan</th>
                             <th class="text-secondary" style="min-width: 100px; word-wrap: break-word;">Aksi</th>
                         </tr>
                     </thead>
@@ -38,6 +39,7 @@
                                         {{ $denda->tgl_denda }}
                                     @endif
                                 </td>
+                                <td>{{ $denda->keterangan }}</td>
                                 <td>
                                     @if (!$denda->is_lunas)
                                         <div class="container text-center">
