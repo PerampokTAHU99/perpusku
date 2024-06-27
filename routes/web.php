@@ -5,6 +5,7 @@ use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DendaController;
+use App\Http\Controllers\PDFController;
 
 Route::get('/', function () {
     return view('dashboard',[
@@ -32,3 +33,6 @@ Route::post('/pengembalian/{id}/destroy', [PengembalianController::class, 'destr
 
 Route::get('/denda', [DendaController::class, 'index'])->name('denda.index');
 Route::post('/denda/{id}', [DendaController::class, 'put'])->name('denda.put');
+
+Route::get('/pdf/test', fn () => view('pdfs.denda'));
+Route::get('/pdf/denda', [PDFController::class, 'denda'])->name('pdf.denda');
