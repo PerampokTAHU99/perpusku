@@ -21,7 +21,7 @@ class BukuFactory extends Factory
             'penulis' => $this->faker->name,
             'penerbit' => $this->faker->company,
             'stok' => $this->faker->numberBetween(0, 100),
-            'sampul' => $this->faker->imageUrl(),
+            'sampul' => "",
             'kategori' => $this->faker->word,
             'keterangan' => $this->faker->paragraph,
             'harga' => $this->faker->numberBetween(10000, 100000),
