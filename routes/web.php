@@ -28,7 +28,6 @@ Route::post('/peminjaman/{id}/destroy', [PeminjamanController::class, 'destroy']
 
 Route::get('/pengembalian', [PengembalianController::class, 'index'])->name('pengembalian.index');
 Route::post('/pengembalian', [PengembalianController::class, 'create'])->name('pengembalian.create');
-Route::post('/pengembalian/{id}', [PengembalianController::class, 'update'])->name('pengembalian.update');
 Route::post('/pengembalian/{id}/destroy', [PengembalianController::class, 'destroy'])->name('pengembalian.destroy');
 
 Route::get('/denda', [DendaController::class, 'index'])->name('denda.index');
