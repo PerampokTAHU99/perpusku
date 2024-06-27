@@ -9,7 +9,7 @@ class Pengembalian extends Model
 {
     use HasFactory;
     protected $table = 'pengembalian';
-    protected $primaryKey = 'id_peminjaman';
+    protected $primaryKey = 'id_pengembalian';
 
     protected $fillable = [
         'id_peminjaman',
