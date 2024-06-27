@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Pengembalian;
 use App\Models\Peminjaman;
+use App\Models\Denda;
 
 class PengembalianController extends Controller
 {
@@ -51,6 +52,22 @@ class PengembalianController extends Controller
         $pengembalian->jumlah_pengembalian = $jmlPengembalian;
         $pengembalian->save();
 
+        if ($pengembalian->tgl_pengembalian > $pengembalian->peminjaman->tgl_pengembalian) {
+            Denda::create([
+                'id_peminjaman' => $pengembalian->id_peminjaman,
+                'id_pengembalian' => $pengembalian->id_pengembalian,
+                'id_user' => $pengembalian->id_user,
+                'tgl_denda' => $pengembalian->tgl_pengembalian,
+                'id_buku' => $pengembalian->id_buku,
+                'keterangan' => "Telat Mengembalikan Buku"
+            ]);
+
+            return redirect()->route('pengembalian.index')->with([
+                'status', "SUCCESS",
+                'message', "Telat Mengembalikan Buku, Dapat Dikenakan Denda"
+            ]);
+        }
+
         return redirect()->route('pengembalian.index')->with('status', "SUCCESS");
     }
 
@@ -63,7 +80,7 @@ class PengembalianController extends Controller
 
     public function destroy($id): RedirectResponse
     {
-        $pengembalian = Pengembalian::find($id);
+        $pengembalian = Pengembalian::where('id_pengembalian', $id)->first();
         $pengembalian->delete();
         return redirect()->route('pengembalian.index')->with('status', "SUCCESS");
     }
