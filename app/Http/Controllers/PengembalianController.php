@@ -39,6 +39,7 @@ class PengembalianController extends Controller
         $tglPengembalian = $request->post('tgl_pengembalian');
         $idPeminjaman = $request->post('id_peminjaman');
         $jmlPengembalian = $request->post('jml_pengembalian');
+        $kondisi = $request->post('kondisi');
 
         $pengembalian = new Pengembalian();
         $pengembalian->id_peminjaman = $idPeminjaman;
@@ -81,17 +82,23 @@ class PengembalianController extends Controller
             $message = "Telat Mengembalikan Buku, Dikenakan Denda";
         }
 
+        if ($kondisi == 0) {
+            Denda::create([
+                'id_peminjaman' => $pengembalian->id_peminjaman,
+                'id_pengembalian' => $pengembalian->id_pengembalian,
+                'id_user' => $pengembalian->id_user,
+                'tgl_denda' => $pengembalian->tgl_pengembalian,
+                'id_buku' => $pengembalian->id_buku,
+                'keterangan' => "Merusak Buku"
+            ]);
+
+            $message = "Merusak Buku, Dikenakan Denda";
+        }
+
         return redirect()->route('pengembalian.index')->with([
             'status' => "SUCCESS",
             'message' => $message
         ]);
-    }
-
-    public function update(Request $request, $id): RedirectResponse
-    {
-        $pengembalian = Pengembalian::find($id);
-        $pengembalian->update($request->post());
-        return redirect()->route('pengembalian.index')->with('status', "SUCCESS");
     }
 
     public function destroy($id): RedirectResponse

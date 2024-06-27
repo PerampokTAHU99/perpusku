@@ -113,6 +113,25 @@
                             <label for="jml_pengembalian">Jumlah Dikembalikan</label>
                             <input type="number" class="form-control" name="jml_pengembalian" id="jml_pengembalian" min="1" value="0" required>
                         </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="kondisi">Kondisi Buku</label>
+                            <div class="container d-flex">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="kondisi" id="kondisi1" value="1" checked>
+                                    <label class="form-check-label" for="kondisi1">
+                                        Aman
+                                    </label>
+                                </div>
+                                <div class="m-2"></div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="kondisi" id="kondisi2" value="0">
+                                    <label class="form-check-label" for="kondisi2">
+                                        Rusak / Lecet / Sobek / Hilang
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <input type="hidden" id="id-peminjaman" name="id_peminjaman" value="" required>
                 </div>
@@ -126,7 +145,6 @@
 </div>
 
 <script>
-
     document.addEventListener('DOMContentLoaded', () => {
         const listUser = @json($listUser);
         console.log(listUser);
