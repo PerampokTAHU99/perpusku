@@ -89,7 +89,11 @@
                                                     <select name="kategori" id="kategori" class="form-control">
                                                         <option value=""> -- Pilih Kategori -- </option>
                                                         @foreach (KATEGORI_BUKU as $kategori)
-                                                            <option value="{{ $kategori }}" {{ $kategori == $buku->kategori ? 'selected' : '' }}>{{ $kategori }}</option>
+                                                            @if (isset($buku))
+                                                                <option value="{{ $kategori }}" {{ $kategori == $buku->kategori ? 'selected' : '' }}>{{ $kategori }}</option>
+                                                            @else
+                                                                <option value="{{ $kategori }}">{{ $kategori }}</option>
+                                                            @endif
                                                         @endforeach
                                                     </select>
                                                     <br>
@@ -98,10 +102,12 @@
                                                     <div class="container mt-1">
                                                         <div class="text-center p-5">
                                                             <div class="card">
-                                                                @if ($buku->sampul)
-                                                                    <img id="book-cover" src="{{ Storage::url($buku->sampul) }}" class="w-100" alt="Cover {{ $buku->judul }}">
-                                                                @else
-                                                                    <img id="book-cover" src="https://via.placeholder.com/300x450.png?text=Book+Cover" class="w-100" alt="Book Cover">
+                                                                @if (isset($buku))
+                                                                    @if ($buku->sampul)
+                                                                        <img id="book-cover" src="{{ Storage::url($buku->sampul) }}" class="w-100" alt="Cover {{ $buku->judul }}">
+                                                                    @else
+                                                                        <img id="book-cover" src="https://via.placeholder.com/300x450.png?text=Book+Cover" class="w-100" alt="Book Cover">
+                                                                    @endif
                                                                 @endif
                                                             </div>
                                                             <label class="custom-file-upload btn btn-secondary mt-5" id="upload-button">
@@ -185,7 +191,7 @@
                         <select name="kategori" id="kategori" class="form-control" required>
                             <option value=""> -- Pilih Kategori -- </option>
                             @foreach (KATEGORI_BUKU as $kategori)
-                                <option value="{{ $kategori }}" {{ $kategori == $buku->kategori ? 'selected' : '' }}>{{ $kategori }}</option>
+                                <option value="{{ $kategori }}">{{ $kategori }}</option>
                             @endforeach
                         </select>
                         <br>
@@ -194,11 +200,7 @@
                         <div class="container mt-1">
                             <div class="text-center p-5">
                                 <div class="card">
-                                    @if ($buku->sampul)
-                                        <img id="book-cover" src="{{ Storage::url($buku->sampul) }}" class="w-100" alt="Cover {{ $buku->judul }}">
-                                    @else
-                                        <img id="book-cover" src="https://via.placeholder.com/300x450.png?text=Book+Cover" class="w-100" alt="Book Cover">
-                                    @endif
+                                    <img id="book-cover" src="https://via.placeholder.com/300x450.png?text=Book+Cover" class="w-100" alt="Book Cover">
                                 </div>
                                 <label class="custom-file-upload btn btn-secondary mt-5" id="upload-button">
                                     <input type="file" name="sampul" id="sampul" accept="image/*">
@@ -222,6 +224,7 @@
     fileInputs.forEach(input => {
         input.addEventListener('change', function(event) {
             const file = event.target.files[0];
+            console.log(event.target.files);
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
