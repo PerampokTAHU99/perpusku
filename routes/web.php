@@ -42,7 +42,7 @@ Route::get('/', function () {
         'stok' => $stok,
         'kategori' => $kategori,
         'kategoriJudul' => $kategori->pluck('kategori'),
-        'kategoriTotal' => $kategori->pluck('stok'),
+        'kategoriTotal' => $kategori->pluck('total'),
     ]);
 })->name('dashboard');
 
