@@ -37,7 +37,7 @@
                                 <td>{{ $buku->penerbit }}</td>
                                 <td>
                                     <div style="display: flex; justify-content: center;">
-                                        <img id="book-cover" src="{{ $buku->sampul ? Storage::url($buku->sampul) : 'https://via.placeholder.com/300x450.png?text=Book+Cover' }}" alt="Cover {{ $buku->judul }}" style="width: 150px; height: 200px; object-fit: contain;">
+                                        <img id="book-cover" src="{{ $buku->sampul ? Storage::url($buku->sampul) : Storage::url('uploads/default.png') }}" alt="Cover" style="width: 150px; height: 200px; object-fit: contain;">
                                     </div>
                                 </td>
                                 <td>{{ $buku->kategori }}</td>
@@ -106,7 +106,7 @@
                                                                     @if ($buku->sampul)
                                                                         <img id="book-cover" src="{{ Storage::url($buku->sampul) }}" class="w-100" alt="Cover {{ $buku->judul }}">
                                                                     @else
-                                                                        <img id="book-cover" src="https://via.placeholder.com/300x450.png?text=Book+Cover" class="w-100" alt="Book Cover">
+                                                                        <img id="book-cover" src="{{ Storage::url('uploads/default.png') }}" class="w-100" alt="Book Cover">
                                                                     @endif
                                                                 @endif
                                                             </div>
@@ -200,7 +200,7 @@
                         <div class="container mt-1">
                             <div class="text-center p-5">
                                 <div class="card">
-                                    <img id="book-cover" src="https://via.placeholder.com/300x450.png?text=Book+Cover" class="w-100" alt="Book Cover">
+                                    <img id="book-cover" src="{{ Storage::url('uploads/default.png') }}" class="w-100" alt="Book Cover">
                                 </div>
                                 <label class="custom-file-upload btn btn-secondary mt-5" id="upload-button">
                                     <input type="file" name="sampul" id="sampul" accept="image/*">
