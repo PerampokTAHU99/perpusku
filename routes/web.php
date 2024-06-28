@@ -23,9 +23,9 @@ Route::get('/', function () {
     $totalPinjaman = Peminjaman::all()->count();
     $totalDenda = Denda::where('is_lunas', false)->count();
 
-    $stok = Buku::select('judul', DB::raw("count(*) as total"))
-            ->groupBy('judul')
-            ->orderBy('total', 'desc')
+    $stok = Buku::select('judul', 'stok')
+            ->groupBy('judul', 'stok')
+            ->orderBy('stok', 'desc')
             ->limit(5)
             ->get();
     $kategori = Buku::select('kategori', DB::raw("count(*) as total"))
@@ -42,7 +42,7 @@ Route::get('/', function () {
         'stok' => $stok,
         'kategori' => $kategori,
         'kategoriJudul' => $kategori->pluck('kategori'),
-        'kategoriTotal' => $kategori->pluck('total'),
+        'kategoriTotal' => $kategori->pluck('stok'),
     ]);
 })->name('dashboard');
 
