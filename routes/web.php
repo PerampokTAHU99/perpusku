@@ -1,5 +1,8 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengembalianController;
@@ -10,10 +13,36 @@ use App\Http\Controllers\AuthController;
 
 use App\Http\Middleware\AuthMiddleware;
 
+use App\Models\Buku;
+use App\Models\Peminjaman;
+use App\Models\Denda;
+
 
 Route::get('/', function () {
+    $totalBuku = Buku::all()->count();
+    $totalPinjaman = Peminjaman::all()->count();
+    $totalDenda = Denda::where('is_lunas', false)->count();
+
+    $stok = Buku::select('judul', DB::raw("count(*) as total"))
+            ->groupBy('judul')
+            ->orderBy('total', 'desc')
+            ->limit(5)
+            ->get();
+    $kategori = Buku::select('kategori', DB::raw("count(*) as total"))
+                ->groupBy('kategori')
+                ->orderBy('total', 'desc')
+                ->limit(3)
+                ->get();
+
     return view('dashboard', [
         'active' => 'home',
+        'totalBuku' => $totalBuku,
+        'totalPinjaman' => $totalPinjaman,
+        'totalDenda' => $totalDenda,
+        'stok' => $stok,
+        'kategori' => $kategori,
+        'kategoriJudul' => $kategori->pluck('kategori'),
+        'kategoriTotal' => $kategori->pluck('total'),
     ]);
 })->name('dashboard');
 
