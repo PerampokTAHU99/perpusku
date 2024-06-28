@@ -58,5 +58,5 @@ Route::get('/denda', [DendaController::class, 'index'])->name('denda.index');
 Route::post('/denda/{id}', [DendaController::class, 'put'])->name('denda.put');
 
 // Rute untuk PDF
-Route::get('/pdf/test', fn () => view('pdfs.denda'));
+Route::get('/pdf/test', fn () => view('pdfs.denda'))->withoutMiddleware(AuthMiddleware::class);
 Route::get('/pdf/denda', [PDFController::class, 'denda'])->name('pdf.denda');
