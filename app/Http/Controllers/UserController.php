@@ -121,7 +121,7 @@ class UserController extends Controller
                 'jenis_kelamin' => $request->jenis_kelamin,
             ]);
 
-            return redirect()->route('anggota.index')->with('success', 'Anggota updated successfully.');
+            return redirect()->route('admin.index')->with('success', 'Anggota updated successfully.');
         }
     }
 
@@ -129,6 +129,6 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->route('anggota.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('admin.index')->with('success', 'User deleted successfully.');
     }
 }
