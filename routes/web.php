@@ -6,16 +6,23 @@ use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DendaController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\AuthController;
+
+use App\Http\Middleware\AuthMiddleware;
+
 
 Route::get('/', function () {
     return view('dashboard', [
         'active' => 'home',
     ]);
-});
+})->name('dashboard');
 
-Route::get('/login', function () {
-    return view('login', []);
-});
+// Rute untuk autentikasi
+Route::get(
+    '/auth/login', fn () => view('login', ['active' => 'login'])
+)->name('auth.login')->withoutMiddleware(AuthMiddleware::class);
+Route::post('/auth/login', [AuthController::class, 'authenticate'])->name('auth.authenticate')->withoutMiddleware(AuthMiddleware::class);
+Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout')->withoutMiddleware(AuthMiddleware::class);
 
 // Rute untuk admin
 Route::get('/admin', [UserController::class, 'index'])->name('admin.index');

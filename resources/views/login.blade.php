@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Login - Perpusku</title>
     <!-- Custom fonts for this template -->
     <link href="{{ asset("vendor/fontawesome-free/css/all.min.css") }}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -30,31 +30,31 @@
                   </div>
                   <div class="col-md-6 col-lg-7 d-flex align-items-center">
                     <div class="card-body p-4 p-lg-5 text-black">
-      
-                      <form>
-      
-                        <div class="d-flex align-items-center mb-3 pb-1">
+
+                      <form method="POST" action="{{ route('auth.authenticate') }}">
+                        @csrf
+                        <div class="d-flex align-items-center justify-content-center mb-3 pb-1">
                           <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-                          <span class="h1 fw-bold mb-0 text-center">Perpustakaan SDN 2 Madu</span>
+                          <span class="h2 fw-bold mb-0 text-center">Perpustakaan SDN 2 Madu</span>
                         </div>
-      
+
                         <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
-      
+
                         <div data-mdb-input-init class="form-outline mb-4">
-                          <input type="email" id="form2Example17" class="form-control form-control-lg" />
-                          <label class="form-label" for="form2Example17">username</label>
+                          <label class="form-label" for="email">Username</label>
+                          <input type="text" name="email" id="email" class="form-control form-control-lg" placeholder="Email atau Username" required/>
                         </div>
-      
+
                         <div data-mdb-input-init class="form-outline mb-4">
-                          <input type="password" id="form2Example27" class="form-control form-control-lg" />
-                          <label class="form-label" for="form2Example27">Password</label>
+                          <label class="form-label" for="password">Password</label>
+                          <input type="password" name="password" id="password" class="form-control form-control-lg" placeholder="Kata Sandi" required/>
                         </div>
-      
+
                         <div class="pt-1 mb-4">
-                          <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-lg btn-block" type="button">Login</button>
+                          <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
                         </div>
                       </form>
-      
+
                     </div>
                   </div>
                 </div>
