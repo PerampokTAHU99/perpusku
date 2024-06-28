@@ -43,7 +43,6 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        </form>
                                     </td>
                                 </tr>
 
@@ -165,5 +164,23 @@
         </div>
     </div>
 </div>
+
+<!-- DataTables JS Initialization -->
+@push('scripts')
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true
+        });
+    });
+</script>
+@endpush
 
 @endsection
