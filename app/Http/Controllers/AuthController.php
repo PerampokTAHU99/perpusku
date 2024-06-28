@@ -15,17 +15,21 @@ class AuthController extends Controller
         $emailOrUsername = $request->post('email');
         $password = $request->post('password');
 
-        $userData = User::where('email', $emailOrUsername)->orWhere('username', $emailOrUsername)->first();
+        $userData = User::where(
+            'email', $emailOrUsername
+        )->orWhere(
+            'username', $emailOrUsername
+        )->first();
 
-        if (!$userData) {
-            return redirect()->route('xyz')->with(['status' => 'ERROR', 'message' => 'Akun tidak ditemukan']);
+        if (!$userData || $userData->id_role != 1) {
+            return redirect()->route('auth.login')->with(['status' => 'ERROR', 'message' => 'Akun tidak ditemukan']);
         }
 
         if (!Hash::check($password, $userData->password)) {
             return redirect()->route('auth.login')->with(['status' => 'ERROR', 'message' => 'Password salah']);
         }
 
-        $request->session()->put('userData', $userData->toArray());
+        $request->session()->put('userData', $userData);
         return redirect()->route('dashboard');
     }
 
