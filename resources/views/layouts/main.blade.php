@@ -9,6 +9,8 @@
     <link href="{{ asset("vendor/fontawesome-free/css/all.min.css") }}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
 
     <!-- Custom styles for this template -->
     <link href="{{ asset("css/sb-admin-2.min.css") }}" rel="stylesheet">
@@ -63,7 +65,7 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-home"></i>
                     <span>Dashboard</span></a>
             </li>
 
@@ -78,21 +80,21 @@
             <!-- Nav Item - Admin -->
             <li class="nav-item">
                 <a class="nav-link {{ ($active === "admin") ? 'active' : '' }}" href="/admin">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-user"></i>
                     <span>Admin</span></a>
             </li>
 
             <!-- Nav Item - Anggota -->
             <li class="nav-item">
                 <a class="nav-link {{ ($active === "anggota") ? 'active' : '' }}" href="/anggota">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-users"></i>
                     <span>Anggota</span></a>
             </li>
 
             <!-- Nav Item - Buku -->
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('buku') ? 'active' : '' }}" href="/buku">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-fw fa-book"></i>
                     <span>Buku</span></a>
             </li>
 
@@ -116,7 +118,7 @@
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('denda.index') }}">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-hand-holding-dollar"></i>
                     <span>Denda</span></a>
             </li>
 
